@@ -62,9 +62,3 @@ workflows:
           filters:
             branches:
               only: /^master$/
-
-experimental:
-  notify:
-    branches:
-      only:
-        - master
