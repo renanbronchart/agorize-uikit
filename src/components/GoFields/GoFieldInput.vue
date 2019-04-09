@@ -15,6 +15,7 @@
       :alt="schema.alt"
       :autocomplete="schema.autocomplete"
       :placeholder="schema.placeholder"
+      ref="input"
     >
   </div>
 </template>
@@ -65,7 +66,22 @@ export default {
     */
     schema: {
       type: Object,
-      default: () => {}
+      default: () => {
+        return {
+          wrapperClasses: 'wrapper',
+          inputType: 'text',
+          inputClass: 'input',
+          id: 'input-empty-id',
+          inputName: 'input-empty-id',
+          required: false,
+          autofocus: false,
+          readonly: false,
+          tabindex: -1,
+          alt: 'input',
+          autocomplete: false,
+          placeholder: ''
+        }
+      }
     }
   },
   watch: {
@@ -99,7 +115,7 @@ export default {
         }
       },
       disabled: false,
-      valueInput: 'my first name'
+      value: 'my first name'
     },
     {
       fieldInput: {
@@ -115,7 +131,7 @@ export default {
         }
       },
       disabled: true,
-      valueInput: 'my last name'
+      value: 'my last name'
     }
   ]
 
@@ -125,9 +141,11 @@ export default {
       :key="key"
     >
       <go-field-input
-        v-model="input.valueInput"
+        v-model="input.value"
         :disabled="input.disabled"
         :schema="input.fieldInput"
+        :data-vv-as="input.fieldInput.label"
+        vee-validate="'required"
       />
       <br />
     </div>
